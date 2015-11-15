@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html ng-app="gamePlay">
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/lib/bootstrap.min.css"/>
+		<script type="text/javascript" src="js/lib/angular-1.2.29.min.js"></script>
+		<script type="text/javascript" src="js/lib/angular-animate.js"></script>
+		
+		<script type="text/javascript" src="js/core/Constant.js"></script>
+		<script type="text/javascript" src="js/core/Skill.js"></script>
+		<script type="text/javascript" src="js/core/Character.js"></script>
+		<script type="text/javascript" src="js/core/Hero.js"></script>
+		<script type="text/javascript" src="js/core/Monster.js"></script>
+		<script type="text/javascript" src="js/core/Item.js"></script>
+		<script type="text/javascript" src="js/HeroClass.js"></script>
+		<script type="text/javascript" src="js/MonstersBundle.js"></script>
+		<script type="text/javascript" src="js/ItemsBundle.js"></script>
+		<script type="text/javascript" src="js/game_app.js"></script>
+
+		<link rel="stylesheet" href="css/gameStyle.css">
+	</head>
+	<body ng-controller="GameController">
+		<div id="controllerScreen" class="screen">
+			<button ng-click="stopGame()">Stop Game</button>
+			<button ng-click="hitMonster()">Hit Monster</button>
+			<button ng-click="buyPotion()">Buy poition</button>
+			<button ng-click="spawnMonster()">Spaw Monster</button>
+			<button ng-click="startFight()">Fight</button>
+		</div>
+		<pre>Stage: {{gameStage}}; Poition Price: {{potion.Price}}; {{errorLog}}</pre>
+		<div id="characterScreen" class="screen">
+			<div class="characterBox" id='characterID'>
+				<p ng-bind="hero.Name" class="text-center"></p>
+				<div class="healthBarFrame">
+					<p class="healthBar" style="width: {{hero.HitPointPercent}}%">{{hero.HitPoint}}/{{hero.BaseHitPoint}}</p>
+				</div>
+				<div class="expBarFrame">
+					<p class="expBar" ng-style="{ width: ((hero.EXP*100)/hero.EXPNeedToLevelUp) + '%' }"></p>
+				</div>
+				<p class="text-center">Attack: {{hero.AttackPoint}}</p>
+				<p class="text-center">Money: {{hero.Money}}</p>
+				<p class="text-center">Level: {{hero.Level}}</p>
+			</div>
+		</div>
+
+		<div id="monsterScreen" class="screen">
+			<div ng-repeat="(key, monster) in monstersPool" class="characterBox" id='monster{{key}}'>
+				<p class="text-center">{{monster.Name}} lvl {{monster.Level}}</p>
+				<div class="healthBarFrame">
+					<p class="healthBar" ng-style="{ width: monster.HitPointPercent + '%' }">{{monster.HitPoint}}/{{monster.BaseHitPoint}}</p>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
