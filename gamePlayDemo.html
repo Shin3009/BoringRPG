@@ -2,6 +2,7 @@
 
 <html ng-app="gamePlay">
 	<head>
+		<title>Boring RGP</title>
 		<link rel="stylesheet" type="text/css" href="css/lib/bootstrap.min.css"/>
 		<script type="text/javascript" src="js/lib/angular-1.2.29.min.js"></script>
 		<script type="text/javascript" src="js/lib/angular-animate.js"></script>
@@ -21,11 +22,11 @@
 	</head>
 	<body ng-controller="GameController">
 		<div id="controllerScreen" class="screen">
-			<button ng-click="stopGame()">Stop Game</button>
-			<button ng-click="hitMonster()">Hit Monster</button>
+			<button ng-show="StopGameDis" ng-click="stopGame()">Stop Game</button>
+			<button ng-show="HitMonsterDis" ng-click="hitMonster()">Hit Monster</button>
 			<button ng-click="buyPotion()">Buy poition</button>
-			<button ng-click="spawnMonster()">Spaw Monster</button>
-			<button ng-click="startFight()">Fight</button>
+			<button ng-show="SpawMonsterDis" ng-click="spawnMonster()">Spaw Monster</button>
+			<button ng-show="FightDis" ng-click="startFight()">Fight</button>
 		</div>
 		<pre>Stage: {{gameStage}}; Poition Price: {{potion.Price}}; {{errorLog}}</pre>
 		<div id="characterScreen" class="screen">

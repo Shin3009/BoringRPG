@@ -26,6 +26,12 @@
 		var gameTime;
 		var animAttack, animReverseAttack, compareFirst, compareSecond, compare, firstMonster, secondMonster;
 
+		//Display button
+		$scope.StopGameDis = false;
+		$scope.HitMonsterDis = false;
+		$scope.SpawMonsterDis = false;
+		$scope.FightDis = true;
+
 		$scope.errorLog = null;
 		$scope.gameStage = 1;
 		$scope.monstersPool = [];
@@ -39,12 +45,12 @@
 		//
 		//////////////////////////////////////////////////////////////////////////////
 		/**
-		 * @brief 
-		 * @author
-		 * @param 
-		 * @return 
+		 * @brief: Buy poition to heal Hero hit point
+		 * @author: Tuan Nguyen
+		 * @param: type
+		 * @return: none
 		 */
-		$scope.buyPotion = function () {
+		$scope.buyPotion = function (type) {
 			isSuccess = $scope.potion.BoughtAndUsedBy($scope.hero);
 			if (!isSuccess) {
 				$scope.errorLog = "You don't have enought money !";
