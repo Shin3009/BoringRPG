@@ -1,5 +1,15 @@
 <!DOCTYPE html>
-
+<!--
+/////////////////////////////////////////////////////////////////////////////
+//
+//  NGUYEN VAN MINH TUAN  @ AUTO RPG
+//
+//////////////////////////////////////////////////////////////////////////////
+//
+//  Description    : Main game @ POWERED BY ANGULAR JS
+//
+//////////////////////////////////////////////////////////////////////////////
+-->
 <html ng-app="gamePlay">
 	<head>
 		<title>Boring RGP</title>
@@ -28,7 +38,18 @@
 			<button ng-show="SpawMonsterDis" ng-click="spawnMonster()">Spaw Monster</button>
 			<button ng-show="FightDis" ng-click="startFight()">Fight</button>
 		</div>
-		<pre>Stage: {{gameStage}}; Poition Price: {{potion.Price}}; {{errorLog}}</pre>
+		<pre>
+			Stage: {{gameStage}}; 
+			Poition Price: {{potion.Price}}; 
+			Count: {{count}}; 
+			Turn Pos: {{turnPos}}; 
+			Flag: {{flag}}; 
+			MonsterIndex: {{monsterIndex}}; 
+			NewTurn: {{newTurn}}; 
+			MonsterChose: {{choseMonsterID}};
+			WaitingForUser: {{waitingForUser}};
+			{{errorLog}}
+		</pre>
 		<div id="characterScreen" class="screen">
 			<div class="characterBox" id='characterID'>
 				<p ng-bind="hero.Name" class="text-center"></p>
@@ -45,7 +66,7 @@
 		</div>
 
 		<div id="monsterScreen" class="screen">
-			<div ng-repeat="(key, monster) in monstersPool" class="characterBox" id='monster{{key}}'>
+			<div ng-repeat="(key, monster) in monstersPool" class="characterBox" id='monster{{key}}' ng-click="choseMonster(key)">
 				<p class="text-center">{{monster.Name}} lvl {{monster.Level}}</p>
 				<div class="healthBarFrame">
 					<p class="healthBar" ng-style="{ width: monster.HitPointPercent + '%' }">{{monster.HitPoint}}/{{monster.BaseHitPoint}}</p>

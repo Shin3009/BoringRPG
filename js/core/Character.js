@@ -28,6 +28,7 @@ var Character = function (name, hitPoint, attackPoint, speed) {
 	this.BasicSkill = null;
 	this.Level = 1;
 	this.ActionRate = undefined;
+	this.TimeOut = undefined;
 };
 
 /**
