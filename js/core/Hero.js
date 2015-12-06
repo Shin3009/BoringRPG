@@ -66,7 +66,7 @@ Hero.prototype.RestoreHitPoint = function () {
 }
 
 /**
- * @brief 
+ * @brief: Use skill
  * @author
  * @param 
  * @return 

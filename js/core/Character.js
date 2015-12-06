@@ -70,10 +70,10 @@ Character.prototype.Attack = function (character) {
 };
 
 /**
- * @brief 
- * @author
- * @param 
- * @return 
+ * @brief: Get a status
+ * @author: Tuan Nguyen
+ * @param: type, duration
+ * @return: none 
  */
 Character.prototype.getStatus = function (type, duration) {
 	this.Status = type;
@@ -82,10 +82,10 @@ Character.prototype.getStatus = function (type, duration) {
 };
 
 /**
- * @brief 
- * @author
- * @param 
- * @return 
+ * @brief: Reduce status turn
+ * @author: Tuan Nguyen
+ * @param: none
+ * @return: none
  */
 Character.prototype.reduceStatusDuration = function () {
 	this.StatusDuration --;

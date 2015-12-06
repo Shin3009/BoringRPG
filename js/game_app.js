@@ -25,7 +25,7 @@
 		
 		var gameTime;
 		var animAttack, animReverseAttack, compareFirst, compareSecond, compare, firstMonster, secondMonster;
-		var TimeOutSlot = [];
+		$scope.TimeOutSlot = [];
 		var flag = 0;
 		var newTurn = 1;
 		var numberOfCharacter = 3;
@@ -39,10 +39,10 @@
 		$scope.turnPos = 0;
 		$scope.flag = 0;
 		$scope.newTurn = 1;
-		$scope.count = 0;
 		$scope.monsterIndex = 0;
 		$scope.choseMonsterID = 0;
 		$scope.waitingForUser = 0;
+		$scope.playerTurn = 0;
 
 		$scope.TurnSlotManage = [0,0,0,0];
 		$scope.errorLog = null;
@@ -71,13 +71,17 @@
 		};
 
 		/**
-		 * @brief: Buy poition to heal Hero hit point
+		 * @brief: Get monster id when click monster on GUI
 		 * @author: Tuan Nguyen
-		 * @param: type
+		 * @param: key
 		 * @return: none
 		 */
 		$scope.choseMonster = function (key) {
 		 	$scope.choseMonsterID = key;
+		 	if (!$scope.playerTurn) {
+		 		return;
+		 	}
+		 	$scope.playerTurn = 0;
 		 	$scope.hitSelectedMonster(key);
 		 	$scope.waitingForUser = 1;
 		}
@@ -107,14 +111,12 @@
 				$scope.spawnMonster();
 				firstStart = false;
 			}
-			TimeOutSlot = [];
-			TimeOutSlot.push($scope.monstersPool[1]);
-			TimeOutSlot.push($scope.hero);
-			TimeOutSlot.push($scope.monstersPool[0]);
-			TimeOutSlot.push($scope.monstersPool[2]);
+			$scope.TimeOutSlot = [];
+			$scope.TimeOutSlot.push($scope.monstersPool[1]);
+			$scope.TimeOutSlot.push($scope.monstersPool[0]);
+			$scope.TimeOutSlot.push($scope.monstersPool[2]);
+			$scope.TimeOutSlot.push($scope.hero);
 			numberOfCharacter = 3;
-
-			console.log(TimeOutSlot);
 
 			if (angular.isDefined(gameTime)) {
 				return;
@@ -136,42 +138,25 @@
 		 * @param 
 		 * @return 
 		 */
-		$scope.checkDeadMonster = function (monster) {
-			if (isStop) {
-				return;
-			}
-			if (monster.HitPoint <= 0) {
-				tempHeroLevel = $scope.hero.Level;
-				monster.DeadBy($scope.hero);
-				deadMonster = $scope.monstersPool.pop();
-				$scope.stopMonsterInterval(deadMonster);
-				delete deadMonster;
-				if ($scope.hero.Level > tempHeroLevel) {
-					$scope.heroIsLevelUp();
-				}
-
-			}
-		};
-
-		/**
-		 * @brief 
-		 * @author
-		 * @param 
-		 * @return 
-		 */
 		$scope.checkDeadMonsters = function () {
 			if (isStop) {
 				return;
 			}
 			angular.forEach($scope.monstersPool, function (monster, key) {
 				if (monster.HitPoint <= 0) {
-					var monsterIndexInSlot = TimeOutSlot.indexOf(monster);
+					var monsterIndexInSlot = $scope.TimeOutSlot.indexOf(monster);
+					// For in case monster slot deleted is in previous slot of player slot
+					if ($scope.turnPos > monsterIndexInSlot) {
+						$scope.turnPos--;
+						$scope.TurnSlotManage[$scope.turnPos] = 1
+					}
+					
 					tempHeroLevel = $scope.hero.Level;
 					monster.DeadBy($scope.hero);
 					deadMonster = $scope.monstersPool.splice(key, 1);
 					
 					delete deadMonster;
-					TimeOutSlot.splice(monsterIndexInSlot, 1);
+					$scope.TimeOutSlot.splice(monsterIndexInSlot, 1);
 					numberOfCharacter--;
 
 					if ($scope.hero.Level > tempHeroLevel) {
@@ -445,12 +430,12 @@
 
 			if ($scope.TurnSlotManage[$scope.turnPos]) {
 				$scope.flag = 1;
-				if (TimeOutSlot[$scope.turnPos] instanceof Monster) {
-					TimeOutSlot[$scope.turnPos].TimeOut = $timeout(function() {
-						if (TimeOutSlot[$scope.turnPos] instanceof Monster) {
-							var monsterIndex = $scope.monstersPool.indexOf(TimeOutSlot[$scope.turnPos]);
+				if ($scope.TimeOutSlot[$scope.turnPos] instanceof Monster) {
+					$scope.TimeOutSlot[$scope.turnPos].TimeOut = $timeout(function() {
+						if ($scope.TimeOutSlot[$scope.turnPos] instanceof Monster) {
+							var monsterIndex = $scope.monstersPool.indexOf($scope.TimeOutSlot[$scope.turnPos]);
 							$scope.monsterIndex = monsterIndex;
-							$scope.getHitFrom(TimeOutSlot[$scope.turnPos], monsterIndex);
+							$scope.getHitFrom($scope.TimeOutSlot[$scope.turnPos], monsterIndex);
 						}
 						else {
 							$scope.hitMonster();
@@ -460,12 +445,14 @@
 					$scope.TurnSlotManage[$scope.turnPos] = 0;
 				}
 				else {
+					$scope.playerTurn = 1;
 					if ($scope.waitingForUser) {
-						TimeOutSlot[$scope.turnPos].TimeOut = $timeout(function() {
+						$scope.waitingForUser = 0;
+						$scope.playerTurn = 0;
+						$scope.TimeOutSlot[$scope.turnPos].TimeOut = $timeout(function() {
 							$scope.flag = 0;
 						}, 200);
-						$scope.TurnSlotManage[$scope.turnPos] = 0;
-						$scope.waitingForUser = 0;
+						$scope.TurnSlotManage[$scope.turnPos] = 0;		
 					}
 				}
 			}
@@ -476,7 +463,6 @@
 					$scope.turnPos = 0;
 				}
 			}
-			$scope.count ++;
 		};
 
 

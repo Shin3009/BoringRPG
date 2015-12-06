@@ -8,16 +8,13 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////////////////////////////////
-//
-//  HALF POTION
-//
-//////////////////////////////////////////////////////////////////////////////
+//==================================================
+//	HALF POITION
+//==================================================
 /**
  * @brief: Constructor
- * @author: 
- * @param: 
- * @return: 
+ * @author: Tuan Nguyen
+ * @param: Hero hero
  */
 var HalfPotion = function (hero) {
 	Item.call(this, "Half Potion", 17);
@@ -31,20 +28,20 @@ HalfPotion.prototype = Object.create(Item.prototype);
 HalfPotion.prototype.constructor = HalfPotion;
 
 /**
- * @brief: 
- * @author: 
- * @param: 
- * @return: 
+ * @brief: Change price of poition base on her HP
+ * @author: Tuan Nguyen
+ * @param: Hero hero
+ * @return: none
  */
 HalfPotion.prototype.ChangePriceBaseOn = function (hero) {
 	this.Price = Math.round((hero.HitPoint * this.BasePrice)/2);
 }
 
 /**
- * @brief: 
- * @author: 
- * @param: 
- * @return: 
+ * @brief: Inherit and overload from class Item
+ * @author: Tuan Nguyen
+ * @param: Hero hero
+ * @return: none
  */
 HalfPotion.prototype.BoughtAndUsedBy = function (hero) {
 	// Call super

@@ -15,11 +15,13 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
+//==================================================
+//	KNIGHT
+//==================================================
 /**
- * @brief: KNIGHT
- * @author: 
- * @param: 
- * @return: 
+ * @brief: Constructor
+ * @author: Tuan Nguyen
+ * @param: string level
  */
 var Knight = function (name) {
 	Hero.call(
@@ -39,10 +41,10 @@ Knight.prototype = Object.create(Hero.prototype);
 Knight.prototype.constructor = Knight;
 
 /**
- * @brief 
- * @author
- * @param 
- * @return 
+ * @brief: Calculate experience and stat when level up 
+ * @author: Tuan Nguyen
+ * @param: none 
+ * @return: none 
  */
 Knight.prototype.LevelUp = function () {
  	Hero.prototype.LevelUp.apply(this);

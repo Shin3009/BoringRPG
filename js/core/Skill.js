@@ -4,15 +4,15 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 //
-//  Description    : 
+//  Description    : Define SKILL class
 //
 //////////////////////////////////////////////////////////////////////////////
 
 /**
- * @brief 
- * @author
- * @param 
- * @return 
+ * @brief: Constructor
+ * @author: Tuan Nguyen
+ * @param: name, skillType
+ * @return: none
  */
 var Skill = function (name, skillType) {
 	this.Name = name;
@@ -27,10 +27,10 @@ var Skill = function (name, skillType) {
 }
 
 /**
- * @brief 
- * @author
- * @param 
- * @return 
+ * @brief: Use skill 
+ * @author: Tuan Nguyen
+ * @param: none 
+ * @return: none 
  */
 Skill.prototype.Use = function () {
 	

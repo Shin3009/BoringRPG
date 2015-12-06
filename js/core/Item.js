@@ -9,10 +9,10 @@
 //////////////////////////////////////////////////////////////////////////////
 
 /**
- * @brief 
- * @author
- * @param 
- * @return 
+ * @brief: Constructor
+ * @author: Tuan Nguyen
+ * @param: name, startBasePrice
+ * @return: none
  */
 var Item = function (name, startBasePrice) {
 	this.Name = name;
@@ -21,10 +21,10 @@ var Item = function (name, startBasePrice) {
 }
 
 /**
- * @brief 
- * @author
- * @param 
- * @return 
+ * @brief: Bought and use item
+ * @author: Tuan Nguyen
+ * @param: hero
+ * @return: bool isSuccess
  */
 Item.prototype.BoughtAndUsedBy = function (hero) {
 	isSuccess = false;

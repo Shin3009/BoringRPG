@@ -15,14 +15,13 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
-//=================================================
+//==================================================
 //	RAT
 //==================================================
 /**
  * @brief: Constructor
- * @author: 
- * @param: 
- * @return: 
+ * @author: Tuan Nguyen
+ * @param: int level
  */
 var Rat = function (level) {
 	Monster.call(
@@ -43,14 +42,13 @@ var Rat = function (level) {
 Rat.prototype = Object.create(Monster.prototype);
 Rat.prototype.constructor = Rat;
 
-//=================================================
+//==================================================
 //	GOLBIN
 //==================================================
 /**
  * @brief: Constructor
- * @author: 
- * @param: 
- * @return: 
+ * @author: Tuan Nguyen
+ * @param: int level
  */
 var Golbin = function (level) {
 	Monster.call(
